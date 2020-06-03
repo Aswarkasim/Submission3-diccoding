@@ -10,45 +10,45 @@ import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
-class MatchPresenter(private val view: MatchView,
+class MatchPresenter(private val view: MatchView?,
                      private val api:ApiRepository,
                      private val gson: Gson) {
 
     fun getMatchList(idLeague: String){
-        view.showLoading()
+        view?.showLoading()
         doAsync {
             val data = gson.fromJson(api.doRequest(TSDBApi.getMatch(idLeague)), MatchResponse::class.java)
 
             uiThread {
-                view.hideLoading()
-                view.showMatchList(data.events)
+                view?.hideLoading()
+                view?.showMatchList(data.events)
             }
         }
     }
 
     fun getNextMatchList(idLeague: String?){
-        view.showLoading()
+        view?.showLoading()
         doAsync {
 
             val data = gson.fromJson(api.doRequest(TSDBApi.getNextMatch(idLeague)), MatchResponse::class.java)
 
             uiThread {
-                view.hideLoading()
-                view.showMatchList(data.events)
+                view?.hideLoading()
+                view?.showMatchList(data.events)
             }
         }
     }
 
 
     fun getSearchList(params: String?){
-        view.showLoading()
+        view?.showLoading()
         doAsync {
             val data = gson.fromJson(api.doRequest(TSDBApi.getSearch(params)), SearchResponse::class.java)
 
             uiThread {
-                view.hideLoading()
+                view?.hideLoading()
                 val value: List<MatchModel> = data.event.filter { it.strSport == "Soccer" }
-                view.showMatchList(value)
+                view?.showMatchList(value)
             }
         }
     }

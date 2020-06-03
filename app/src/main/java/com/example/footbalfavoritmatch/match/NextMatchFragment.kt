@@ -2,6 +2,7 @@ package com.example.footbalfavoritmatch.match
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,8 @@ class NextMatchFragment(val idLeague: String?) : Fragment(), MatchView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        Log.d("Adakah", "id $idLeague")
+
 
         adapter = MatchAdapter(events){
             //toast("adakah ${it.strHomeTeam} dan ${it.strAwayTeam}")
@@ -49,7 +52,9 @@ class NextMatchFragment(val idLeague: String?) : Fragment(), MatchView {
         }
         listMatch.adapter = adapter
         presenter = MatchPresenter(this, ApiRepository(), Gson())
-        if (idLeague != null) {
+        if(idLeague != null) {
+            presenter.getNextMatchList(idLeague)
+
             swipeRefreshLayout.onRefresh {
                 presenter.getNextMatchList(idLeague)
             }

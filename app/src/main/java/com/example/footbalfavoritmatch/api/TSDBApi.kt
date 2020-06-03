@@ -7,6 +7,10 @@ object TSDBApi {
         return BuildConfig.BASE_URL+BuildConfig.TSDB_API_KEY+"all_leagues.php"
     }
 
+    fun getLeagueDetail(idLeague: String?): String{
+        return BuildConfig.BASE_URL+BuildConfig.TSDB_API_KEY+"lookupleague.php?id=$idLeague"
+    }
+
     fun getMatch(idLeague: String?): String{
         return BuildConfig.BASE_URL+BuildConfig.TSDB_API_KEY+"eventspastleague.php?id=$idLeague"
     }

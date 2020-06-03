@@ -52,6 +52,9 @@ class LastMatchFragment(val idLeague: String?) : Fragment(), MatchView {
         listMatch.adapter = adapter
 
         presenter = MatchPresenter(this, ApiRepository(), Gson())
+        if (idLeague != null) {
+            presenter.getMatchList(idLeague)
+        }
 
         if (idLeague != null) {
             swipeRefreshLayout.onRefresh {

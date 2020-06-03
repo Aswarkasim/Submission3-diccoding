@@ -92,7 +92,16 @@ class DetailMatchActivity : AppCompatActivity(), DetailView {
 
     private fun addToFavorite(){
         val detailMatch = intent.getParcelableExtra<MatchModel>(EXTRA_DATA)
-        Log.d("Adakah", "ada ini $detailMatch")
+        Log.d("Adakah", "ada ini id event " +
+                "${detailMatch.idEvent} \n " +
+                "idhome team ${detailMatch.idHomeTeam} \n" +
+                "idAway team ${detailMatch.idAwayTeam} \n" +
+                "strHomeTeam ${detailMatch.strHomeTeam} \n" +
+                "strAwayTeam ${detailMatch.strAwayTeam} \n" +
+                "strHomeScrore ${detailMatch.intHomeScore}\n" +
+                "strAwayTeam ${detailMatch.intAwayScore} \n" +
+                "date ${detailMatch.dateEvent}"
+        )
         try {
             database.use {
                 insert(
